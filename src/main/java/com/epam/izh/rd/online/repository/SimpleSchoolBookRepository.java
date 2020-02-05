@@ -10,9 +10,7 @@ public class SimpleSchoolBookRepository implements BookRepository<SchoolBook> {
     public boolean save(SchoolBook book) {
         SchoolBook[] newSchoolBooks = schoolBooks;
         schoolBooks = new SchoolBook[count() + 1];
-        for (int i = 0; i < newSchoolBooks.length; i++) {
-            schoolBooks[i] = newSchoolBooks[i];
-        }
+        System.arraycopy(newSchoolBooks, 0, schoolBooks, 0, newSchoolBooks.length);
         schoolBooks[newSchoolBooks.length] = book;
         return true;
     }
@@ -43,7 +41,6 @@ public class SimpleSchoolBookRepository implements BookRepository<SchoolBook> {
                 counter++;
             }
         }
-        SchoolBook[] newSchoolBooks = schoolBooks;
         schoolBooks = new SchoolBook[count() - counter];
         for (int i = 0, j = 0; i < count(); i++) {
             if (!(schoolBooks[i].getName().equals(name))) {

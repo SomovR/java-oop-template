@@ -13,9 +13,7 @@ public class SimpleAuthorRepository implements AuthorRepository {
         }
         Author[] newAuthors = authors;
         authors = new Author[newAuthors.length + 1];
-        for (int i = 0; i < newAuthors.length; i++) {
-            authors[i] = newAuthors[i];
-        }
+        System.arraycopy(newAuthors, 0, authors, 0, newAuthors.length);
         authors[newAuthors.length] = author;
         return true;
     }
@@ -38,17 +36,11 @@ public class SimpleAuthorRepository implements AuthorRepository {
         Author[] newAuthors = authors;
         authors = new Author[count() - 1];
         for (int i = 0; i < count(); i++) {
-            if ((author.getName() + author.getLastName()).equals(newAuthors[i].getName() + newAuthors[i].getLastName())) {
-                continue;
-            } else {
+            if(!(author.getName().equals(newAuthors[i].getName()) && author.getLastName().equals(newAuthors[i].getLastName()))) {
                 authors[i] = newAuthors[i];
             }
         }
         return true;
-
-
-
-
     }
 
     @Override
